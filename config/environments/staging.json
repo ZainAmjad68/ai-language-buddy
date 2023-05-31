@@ -1,0 +1,12 @@
+{
+  "environment": "development",
+  "openai": {
+      "url": "https://api.openai.com/v1",
+      "api_key": "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",
+      "chat_postfix": "/chat/completions",
+      
+      "completion_postfix": "/completions",
+      "completion_model": "text-davinci-003",
+      "chat_model": "gpt-3.5-turbo"
+  }
+}
