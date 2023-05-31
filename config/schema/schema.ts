@@ -16,7 +16,7 @@ const config = convict({
     api_key: {
       doc: "The API Key used with the OpenAI account",
       format: String,
-      default: "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",
+      default: "XYZ",
     },
     chat_postfix: {
       doc: "Chat Completion part of the OpenAI API",
