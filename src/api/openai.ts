@@ -2,7 +2,6 @@ import { AxiosResponse, AxiosRequestConfig } from 'axios';
 import {
   ICompletionResult,
   IApiParams,
-  IApiOptions,
 } from '../types/IOpenAI';
 import API from './api';
 import urlJoin from "url-join";

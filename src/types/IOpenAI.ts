@@ -1,8 +1,3 @@
-export enum GrantType {
-    REFRESH_TOKEN = 'refresh_token',
-    PASSWORD = 'password'
-  }
-  
   export interface IApiOptions {
     max_tokens?: string
     temperature?: string

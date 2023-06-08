@@ -2,7 +2,7 @@ import convict from "convict";
 
 const config = convict({
   environment: {
-    doc: "Specifies the running environment of app_sftp_import",
+    doc: "Specifies the running environment of AI Language Buddy",
     format: ["production", "staging", "staging"],
     env: "HFP_ENV",
     default: "development",
