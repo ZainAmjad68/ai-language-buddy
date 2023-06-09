@@ -3,10 +3,21 @@
     temperature?: string
   }
 
-  export interface IApiParams {
-    model?: string
+  export interface ICompletionParams {
+    model: string
     prompt: string,
     options?: IApiOptions
+  }
+
+  export interface IChatParams {
+    model: string;
+    messages: IChatMessage[];
+    options?: IApiOptions;
+  }  
+
+  export interface IChatMessage {
+    role: string;
+    content: string;
   }
   
   export interface ICompletionResult {
@@ -15,9 +26,8 @@
     "created": number,
     "model": string,
     "choices": Array<{
-      "text": string,
+      "message": { role: string, content: string }
       "index": number,
-      "logprobs": string | null,
       "finish_reason": string
     }>,
     "usage": {

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // import { Loader } from 'components/Loader';
@@ -6,6 +6,7 @@ import { Routes, Route } from 'react-router-dom';
 const AppRoutes = lazy(() => import('./routes'));
 
 function RootRoutes() {
+  console.log('root routes')
   return (
     <Routes>
       <Route
