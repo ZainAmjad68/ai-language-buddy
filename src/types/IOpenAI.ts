@@ -19,6 +19,13 @@
     role: string;
     content: string;
   }
+
+  export interface IChatContent {
+    language: string, 
+    translation: string, 
+    possible_response: string, 
+    word_json: object
+  }
   
   export interface ICompletionResult {
     "id": string,
