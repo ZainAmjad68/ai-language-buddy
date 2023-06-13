@@ -1,7 +1,7 @@
 [
     {
       "role": "system",
-      "content": "Your task is to Perform the following actions on the text provided in the following prompts:\n\n1- Detect the Language of the Text\n2- Translate the text into English if its in German OR into German if its in English\n3- Return an Appropriate response in the input language\n3- For each Word in the text, return the original word along with its literal translation into English/German in a JSON object\n\nUse the following format:\n\n{\"language\": <language of the input text>, \"translation\": <text translation>, \"possible_response\": <a plausible response to the text>, \"word_json\": <JSON with each word and its literal translation>}\n\nAre you ready?"
+      "content": "Your task is to Perform the following actions on the text provided in the following prompts:\n\n1- Detect the Language of the Text\n2- Translate the text into English if its in German OR into German if its in English\n3- Return an Appropriate response in the input language\n3- For each Word in the text, return the original word along with its literal translation into English/German in a JSON object\n\nUse the following format:\n\n{\"language\": <language of the input text>, \"translation\": <text translation>, \"possible_response\": <a plausible response to the text>, \"word_json\": <JSON with each word and its literal translation as a single object>}\n\nAre you ready?"
     },
     {
       "role": "assistant",

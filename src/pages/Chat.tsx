@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import TextInput from '../components/TextInput';
 import Conversation from '../components/Conversation';
+import WordByWord from '../components/WordByWord';
 import { useQuery } from "@tanstack/react-query"
 import { askGPT } from "../api/openai";
 import { IChatContent } from '../types/IOpenAI';
@@ -18,7 +19,15 @@ function extractRelevantInfo(componentType: string, conversation: {role: string,
       }
     })
   }
-}
+  if (componentType === "word-by-word") {
+    try {
+        const lastReply: IChatContent = JSON.parse(conversation.slice(-1)[0]?.content);
+        return lastReply.word_json;
+      } catch (error) {
+        return [];
+      }
+    }
+  }
 
 const Chat: React.FC = () => {
   const [input, setInput] = useState("");
@@ -86,8 +95,8 @@ const Chat: React.FC = () => {
         </div>
 
         <div className='flex flex-1 flex-col flex-wrap justify-center content-center'>
-          <div>
-            <h1>The First Item</h1>
+          <div className='card'>
+            <WordByWord currentState={postQuery.status} worByWordTranslation={extractRelevantInfo("word-by-word", conversation) as object}  />
           </div>
           <div>
             <h2>The Second Item</h2>
