@@ -7,6 +7,7 @@ import { IChatContent } from '../types/IOpenAI';
 
 
 function extractRelevantInfo(componentType: string, conversation: {role: string, content: string}[]) {
+  console.log('conversation', conversation);
   if (componentType === "chat") {
     return conversation.map(value => {
       try {
@@ -65,12 +66,32 @@ const Chat: React.FC = () => {
     }
 
     return (
-      <div>
-        <div>
-          <Conversation currentState={postQuery.status} conversationData={extractRelevantInfo("chat", conversation) as { role: string; content: string; }[]} />
+      <div className='flex flex-row flex-wrap content-center'>
+        <div className='flex flex-1 flex-col flex-wrap justify-center content-center'>
+          <div>
+            <h1>The First Item</h1>
+          </div>
+          <div>
+            <h2>The Second Item</h2>
+          </div>
         </div>
-        <div className="flex justify-center fixed bottom-0 left-0 w-full bg-white p-2">
-            <TextInput placeholder="Say Something in German..." onSubmit={handleFormSubmit} />
+
+        <div className="flex flex-2-1 flex-col flex-wrap justify-center">
+          <div>
+            <Conversation currentState={postQuery.status} conversationData={extractRelevantInfo("chat", conversation) as { role: string; content: string; }[]} />
+          </div>
+          <div className="fixed bottom-0 flex-1 w-2/4 bg-white p-2">
+              <TextInput placeholder="Say Something in German..." onSubmit={handleFormSubmit} />
+          </div>
+        </div>
+
+        <div className='flex flex-1 flex-col flex-wrap justify-center content-center'>
+          <div>
+            <h1>The First Item</h1>
+          </div>
+          <div>
+            <h2>The Second Item</h2>
+          </div>
         </div>
       </div>
     );
