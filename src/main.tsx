@@ -7,7 +7,7 @@ import Routes from './routes';
 import './styles/index.css';
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({defaultOptions: {queries: {staleTime: Infinity}}});
 
 ReactDOM
   .createRoot(document.getElementById('root') as HTMLElement)

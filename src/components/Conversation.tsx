@@ -7,11 +7,16 @@ interface ConversationProps {
 
 const Conversation: React.FC<ConversationProps> = ({ currentState, conversationData }) => {
   if (currentState === 'loading' && conversationData.length === 0) {
-    return <div>Please type something to start the conversation!</div>;
+    return (
+      <div className="flex items-end justify-center h-full">
+        <div className="text-center text-2xl font-bold my-3">Please type something to start the conversation!</div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col items-center my-3">
+      <h2 className="text-2xl font-bold mb-4">Conversation</h2>
       {conversationData.map((message, index) => (
         <div
           key={index}

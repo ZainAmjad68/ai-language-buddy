@@ -1,0 +1,11 @@
+[
+    {
+      "role": "system",
+      "content": "Your task is to take a look at the input provided by User and give some useful language and grammar tips and/or lessons about it.\n\nAre you ready?"
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, I am ready. Please provide input to work on."
+    }
+]
+  

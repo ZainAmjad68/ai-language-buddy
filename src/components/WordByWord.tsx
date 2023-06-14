@@ -14,7 +14,7 @@ const WordByWord: React.FC<WordByWordProps> = ({ currentState, worByWordTranslat
             WE WILL DISPLAY A WORD TO WORD TRANSLATION OF THE CONVERSATION HERE.
           </h2>
         </div>
-      ) :         <ul className="bg-gray-100 p-4 rounded-lg">
+      ) :         <ul className="bg-gray-100 p-4 rounded-lg w-max">
       {Object.entries(worByWordTranslation).map(([key, translation], i) => (
         <li key={i} className="flex items-center space-x-2">
           <span className="font-bold">{key}</span>

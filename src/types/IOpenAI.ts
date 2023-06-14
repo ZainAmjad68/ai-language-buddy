@@ -21,10 +21,11 @@
   }
 
   export interface IChatContent {
-    language: string, 
     translation: string, 
-    possible_response: string, 
-    word_json: object
+    possible_responses: {response: string, translation: string}[], 
+    input_word_to_word: object,
+    response_word_to_word: object,
+    follow_up: {response: string, translation: string}[],
   }
   
   export interface ICompletionResult {

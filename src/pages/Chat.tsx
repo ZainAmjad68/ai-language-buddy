@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import TextInput from '../components/TextInput';
 import Conversation from '../components/Conversation';
 import WordByWord from '../components/WordByWord';
+import Responses from '../components/Responses';
 import { useQuery } from "@tanstack/react-query"
 import { askGPT } from "../api/openai";
 import { IChatContent } from '../types/IOpenAI';
@@ -13,20 +14,44 @@ function extractRelevantInfo(componentType: string, conversation: {role: string,
     return conversation.map(value => {
       try {
         const promptResponse: IChatContent = JSON.parse(value.content);
-        return { role: value.role, content: promptResponse.possible_response };
+        return { role: value.role, content: promptResponse.possible_responses[0].response };
       } catch (error) {
         return value;
       }
     })
   }
-  if (componentType === "word-by-word") {
+  if (componentType === "word-by-word-input") {
     try {
         const lastReply: IChatContent = JSON.parse(conversation.slice(-1)[0]?.content);
-        return lastReply.word_json;
+        return lastReply.input_word_to_word;
       } catch (error) {
         return [];
       }
     }
+    if (componentType === "word-by-word-response") {
+      try {
+          const lastReply: IChatContent = JSON.parse(conversation.slice(-1)[0]?.content);
+          return lastReply.response_word_to_word;
+        } catch (error) {
+          return [];
+        }
+    }
+    if (componentType === "responses") {
+      try {
+          const lastReply: IChatContent = JSON.parse(conversation.slice(-1)[0]?.content);
+          return lastReply.possible_responses.slice(1);
+        } catch (error) {
+          return [];
+        }
+      }
+    if (componentType === "follow-up") {
+      try {
+          const lastReply: IChatContent = JSON.parse(conversation.slice(-1)[0]?.content);
+          return lastReply.follow_up;
+        } catch (error) {
+          return [];
+        }
+      }
   }
 
 const Chat: React.FC = () => {
@@ -76,16 +101,18 @@ const Chat: React.FC = () => {
 
     return (
       <div className='flex flex-row flex-wrap content-center'>
-        <div className='flex flex-1 flex-col flex-wrap justify-center content-center'>
+        <div className='flex flex-1 flex-col flex-wrap content-center justify-between'>
           <div>
-            <h1>The First Item</h1>
+            <h2 className='text-center text-xl font-bold mb-4'>Response Translation:</h2>
+            <WordByWord currentState={postQuery.status} worByWordTranslation={extractRelevantInfo("word-by-word-response", conversation) as object}  />
           </div>
           <div>
-            <h2>The Second Item</h2>
+            <h2 className='text-center text-xl font-bold mb-4'>Alternate Responses:</h2>
+            <Responses type="response" currentState={postQuery.status} responses={extractRelevantInfo("responses", conversation) as { response: string; translation: string; }[]}  />
           </div>
         </div>
 
-        <div className="flex flex-2-1 flex-col flex-wrap justify-center">
+        <div className="flex flex-2-1 flex-col flex-wrap">
           <div>
             <Conversation currentState={postQuery.status} conversationData={extractRelevantInfo("chat", conversation) as { role: string; content: string; }[]} />
           </div>
@@ -94,12 +121,14 @@ const Chat: React.FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-1 flex-col flex-wrap justify-center content-center'>
-          <div className='card'>
-            <WordByWord currentState={postQuery.status} worByWordTranslation={extractRelevantInfo("word-by-word", conversation) as object}  />
+        <div className='flex flex-1 flex-col flex-wrap content-center justify-between'>
+          <div>
+            <h2 className='text-center text-xl font-bold mb-4'>Response Translation:</h2>
+            <WordByWord currentState={postQuery.status} worByWordTranslation={extractRelevantInfo("word-by-word-input", conversation) as object}  />
           </div>
           <div>
-            <h2>The Second Item</h2>
+            <h2 className='text-center text-xl font-bold mb-4'>Follow-Up Things to Say:</h2>
+            <Responses type="follow-up" currentState={postQuery.status} responses={extractRelevantInfo("follow-up", conversation) as { response: string; translation: string; }[]}  />
           </div>
         </div>
       </div>
