@@ -3,7 +3,8 @@ import {
   ICompletionResult,
 } from '../types/IOpenAI';
 import API from './api';
-import json from "./prompts/german-to-english.json";
+import chatPrompt from "./prompts/german-to-english.json";
+import tipsPrompt from "./prompts/language-tips.json";
 
 const API_Key = import.meta.env.VITE_OPENAI_API_KEY!;
 const ChatUrl = import.meta.env.VITE_OPENAI_CHAT_URL!;
@@ -11,21 +12,24 @@ let modelToUse = import.meta.env.VITE_OPENAI_CHAT_MODEL;
 
 let dataToSend : { role: string, content: string }[] = []; 
 
-function prepareDataToPost(userPrompt: string) {
-    // Read the file asynchronously
-
-    console.log('json',json);
-    dataToSend = JSON.parse(JSON.stringify(json));
-    console.log('dataToSend',dataToSend);
+function prepareChatData(userPrompt: string) {
+    dataToSend = JSON.parse(JSON.stringify(chatPrompt));
     dataToSend.push({
         role: "user",
         content: userPrompt
     })
-    console.log('dataToSend', dataToSend);
+}
+
+function prepareTipsData(text: string) {
+    dataToSend = JSON.parse(JSON.stringify(tipsPrompt));
+    dataToSend.push({
+        role: "user",
+        content: text
+    })
 }
 
 export async function askGPT(prompt: string, model?: string): Promise<ICompletionResult> {
-    prepareDataToPost(prompt);
+    prepareChatData(prompt);
     API.setAuthHeader(API_Key);
     if (model) {
         modelToUse = model;
@@ -35,6 +39,16 @@ export async function askGPT(prompt: string, model?: string): Promise<ICompletio
             model: modelToUse,
             messages: dataToSend
         });
-    console.log('this is the result', response.data);
+    return response.data;
+}
+
+export async function fetchGrammarTips(text: string): Promise<ICompletionResult> {
+    prepareTipsData(text);
+    API.setAuthHeader(API_Key);
+    const response = await API.post(ChatUrl, 
+        {
+            model: modelToUse,
+            messages: dataToSend
+        });
     return response.data;
 }

@@ -1,11 +1,45 @@
-import React from 'react';
-
+import React, {useState, useEffect} from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchGrammarTips } from '../api/openai';
 interface ConversationProps {
   currentState: string;
   conversationData: { role: string; content: string }[];
 }
 
 const Conversation: React.FC<ConversationProps> = ({ currentState, conversationData }) => {
+  const [input, setInput] = useState("");
+
+  const tipsQuery = useQuery(
+    ["grammar", input], 
+    () => fetchGrammarTips(input),
+    {refetchOnWindowFocus: false, enabled: input != ""}
+  );
+
+  useEffect(() => {
+    const elements = document.getElementsByTagName('div');
+    let desiredElement = null;
+    for (let i = 0; i < elements.length; i++) {
+      desiredElement = elements[i];
+      if (desiredElement.textContent != "" && desiredElement.textContent === input) {
+        const computedStyles = window.getComputedStyle(desiredElement);
+        const details = document.createElement('details');
+        details.style.alignSelf = computedStyles.alignSelf;
+        const summary = document.createElement('summary');
+        summary.textContent = 'Grammar Tips';
+        const para = document.createElement('p');
+        para.textContent = tipsQuery.data?.choices[0].message.content ?? '';
+        details.appendChild(summary);
+        details.appendChild(para);
+        desiredElement.insertAdjacentElement('afterend', details);
+        break;
+      }
+    }
+  }, [tipsQuery.data]);
+
+  const handleOnClick = (message: string) => {
+    setInput(message);
+  };
+
   if (currentState === 'loading' && conversationData.length === 0) {
     return (
       <div className="flex items-end justify-center h-full">
@@ -20,9 +54,10 @@ const Conversation: React.FC<ConversationProps> = ({ currentState, conversationD
       {conversationData.map((message, index) => (
         <div
           key={index}
-          className={`rounded-lg p-4 ${
+          className={`rounded-lg p-4 cursor-pointer ${
             message.role === 'user' ? 'bg-blue-200 self-end' : 'bg-green-200 self-start'
           }`}
+          onClick={() => handleOnClick(message.content)}
         >
           {message.content}
         </div>

@@ -1,7 +1,7 @@
 [
     {
       "role": "system",
-      "content": "Your task is to take a look at the input provided by User and give some useful language and grammar tips and/or lessons about it.\n\nAre you ready?"
+      "content": "Your task is to take a look at the input provided by the User and give three useful language and grammar tips about it.\n\nAre you ready?"
     },
     {
       "role": "assistant",
