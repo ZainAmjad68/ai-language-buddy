@@ -123,7 +123,7 @@ const Chat: React.FC = () => {
 
         <div className='flex flex-1 flex-col flex-wrap content-center justify-between'>
           <div>
-            <h2 className='text-center text-xl font-bold mb-4'>Response Translation:</h2>
+            <h2 className='text-center text-xl font-bold mb-4'>Input Translation:</h2>
             <WordByWord currentState={postQuery.status} worByWordTranslation={extractRelevantInfo("word-by-word-input", conversation) as object}  />
           </div>
           <div>

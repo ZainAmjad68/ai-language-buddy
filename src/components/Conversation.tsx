@@ -20,21 +20,21 @@ const Conversation: React.FC<ConversationProps> = ({ currentState, conversationD
     let desiredElement = null;
     for (let i = 0; i < elements.length; i++) {
       desiredElement = elements[i];
-      if (desiredElement.textContent != "" && desiredElement.textContent === input) {
+      if (desiredElement.textContent != "" && desiredElement.textContent === input && tipsQuery.data?.choices[0].message.content) {
         const computedStyles = window.getComputedStyle(desiredElement);
         const details = document.createElement('details');
         details.style.alignSelf = computedStyles.alignSelf;
         const summary = document.createElement('summary');
         summary.textContent = 'Grammar Tips';
         const para = document.createElement('p');
-        para.textContent = tipsQuery.data?.choices[0].message.content ?? '';
+        para.textContent = tipsQuery.data?.choices[0].message.content;
         details.appendChild(summary);
         details.appendChild(para);
         desiredElement.insertAdjacentElement('afterend', details);
         break;
       }
     }
-  }, [tipsQuery.data]);
+  }, [input, tipsQuery.data]);
 
   const handleOnClick = (message: string) => {
     setInput(message);
@@ -62,6 +62,14 @@ const Conversation: React.FC<ConversationProps> = ({ currentState, conversationD
           {message.content}
         </div>
       ))}
+      {(tipsQuery.status === 'loading' && input !== "") && <div
+        className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        role="status">
+        <span
+          className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Loading...</span
+        >
+      </div>}
       {currentState === 'loading' && <div className="self-start">
         <span className="jumping-dots">
           <span className="dot-1"></span>
