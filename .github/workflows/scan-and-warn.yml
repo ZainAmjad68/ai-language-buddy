@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: ZainAmjad68/pr-scan-and-warn@v0.1
+        uses: ZainAmjad68/pr-scan-and-warn@v0.2
         with:
           words-to-scan-for: 'destroy()'
       # Use the output from the `hello` step
