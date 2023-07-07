@@ -1,0 +1,15 @@
+on: [pull_request]
+
+jobs:
+  scan-and-warn-job:
+    runs-on: ubuntu-latest
+    name: A job to check for Dangerous Actions in PR
+    steps:
+      - name: Hello world action step
+        id: hello
+        uses: ZainAmjad68/pr-scan-and-warn@v0.1
+        with:
+          words-to-scan-for: 'destroy()'
+      # Use the output from the `hello` step
+      - name: Get the output Annotation
+        run: echo "The Annotation i got is ${{ steps.hello.outputs.annotations }}"
