@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: ZainAmjad68/pr-scan-and-warn@v0.5
+        uses: ZainAmjad68/pr-scan-and-warn@v0.6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           words-to-scan-for: 'destroy()'
