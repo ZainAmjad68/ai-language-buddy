@@ -6,7 +6,10 @@ import { Routes, Route } from 'react-router-dom';
 const AppRoutes = lazy(() => import('./routes'));
 
 function RootRoutes() {
-  console.log('root routes')
+  console.log('root routes');
+
+  console.log('test log');
+
   return (
     <Routes>
       <Route
