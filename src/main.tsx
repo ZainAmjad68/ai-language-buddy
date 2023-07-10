@@ -13,6 +13,7 @@ console.log('this works 1');
 console.log('this works 2');
 console.log('this works 3');
 console.log('this works 4');
+console.log('this works 5');
 
 ReactDOM
   .createRoot(document.getElementById('root') as HTMLElement)
