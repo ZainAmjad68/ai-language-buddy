@@ -36,9 +36,17 @@ const Conversation: React.FC<ConversationProps> = ({ currentState, conversationD
     }
   }, [input, tipsQuery.data]);
 
+  console.log('first log');
+  console.log('second log');
+  console.log('third log');
+
+
   const handleOnClick = (message: string) => {
     setInput(message);
   };
+
+  console.log('first log (2)');
+  console.log('second log (2)');
 
   if (currentState === 'loading' && conversationData.length === 0) {
     return (
@@ -47,6 +55,8 @@ const Conversation: React.FC<ConversationProps> = ({ currentState, conversationD
       </div>
     );
   }
+  console.log('first log (3)');
+  
 
   return (
     <div className="flex flex-col items-center my-3">
