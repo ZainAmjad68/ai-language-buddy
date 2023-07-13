@@ -21,12 +21,18 @@ jobs:
         with:
           json_diff_file_output: diff.json
 
+      - name: Read JSON Diff
+        id: json-diff
+        env:
+          DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
+        run: echo "::set-output name=diff-contents::$(cat $DIFF | jq -c .)"
+
       - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@v0.8
         id: pr-warn-and-scan
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          diff: ${{ steps.git-diff-action.outputs.json-diff-path }}
+          diff: ${{ steps.json-diff.outputs.diff-contents }}
           words-to-scan-for: 'destroy()'
       # Use the output from the `hello` step
       - name: Get the Output Annotation
