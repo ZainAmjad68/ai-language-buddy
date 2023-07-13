@@ -28,7 +28,7 @@ jobs:
         run: echo "::set-output name=diff-contents::$(cat $DIFF | jq -c .)"
 
       - name: Run PR Scan and Warn Action
-        uses: ZainAmjad68/pr-scan-and-warn@v0.8
+        uses: ZainAmjad68/pr-scan-and-warn
         id: pr-warn-and-scan
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
