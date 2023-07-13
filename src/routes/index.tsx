@@ -11,6 +11,9 @@ function RootRoutes() {
   console.log('test logs');
   console.log('test logs2');
 
+  console.log('end root routes');
+
+
 
   return (
     <Routes>
