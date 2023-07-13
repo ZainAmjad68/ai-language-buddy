@@ -27,7 +27,7 @@ jobs:
           DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
         run: echo "::set-output name=diff-contents::$(cat $DIFF | jq -c .)"
 
-      - name: Run PR Scan and Warn Actionn
+      - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@main
         id: pr-warn-and-scan
         with:
