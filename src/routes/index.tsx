@@ -8,7 +8,9 @@ const AppRoutes = lazy(() => import('./routes'));
 function RootRoutes() {
   console.log('root routes');
 
-  console.log('test log');
+  console.log('test logs');
+  console.log('test logs2');
+
 
   return (
     <Routes>
