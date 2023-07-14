@@ -1,11 +1,12 @@
+name: "Scan and Warn Workflow"
 on: [pull_request]
 
-permissions:
-  contents: read # this is necessary for the Action to be able to read the contents of the repo
-
+permissions: read-all
 jobs:
   scan-and-warn-job:
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
     name: A job to check for Dangerous Actions in PR
     steps:
       # Checkout the repo
