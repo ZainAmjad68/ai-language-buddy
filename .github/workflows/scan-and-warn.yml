@@ -6,6 +6,12 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to check for Dangerous Actions in PR
     steps:
+      # Checkout the repo
+      - name: CheckOut the Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # needed to checkout all branches for this Action to work
+
       - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@main
         with:
