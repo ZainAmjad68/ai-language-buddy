@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 
 const Menu = () => {
-  console.log('i come to menu');
+  console.log('this is the menu, yeah!');
+  console.log('dropTable this should be annotated!');
+  console.log('destroy() this should be annotated!');
+
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <button  className="bg-cyan-900 hover:bg-cyan-800 text-white font-bold py-4 px-5 rounded-lg text-lg truncate mb-4">
