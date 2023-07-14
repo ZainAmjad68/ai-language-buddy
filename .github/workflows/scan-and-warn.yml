@@ -1,39 +1,13 @@
 name: "Scan and Warn Workflow"
 on: [pull_request]
 
-permissions: read-all
 jobs:
   scan-and-warn-job:
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
     name: A job to check for Dangerous Actions in PR
     steps:
-      # Checkout the repo
-      - name: CheckOut the Repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 # needed to checkout all branches for this Action to work
-
-      # Check the PR diff using the current branch and the base branch of the PR
-      - name: Get the PR diff using git-diff-action
-        uses: GrantBirki/git-diff-action@v2.0.1
-        id: git-diff-action
-        with:
-          json_diff_file_output: diff.json
-
-      - name: Read JSON Diff
-        id: json-diff
-        env:
-          DIFF: ${{ steps.git-diff-action.outputs.json-diff-path }}
-        run: echo "::set-output name=diff-contents::$(cat $DIFF | jq -c .)"
-
       - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@main
-        id: pr-warn-and-scan
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           words-to-scan-for: 'destroy(), dropTable'
-      # Use the output from the `hello` step
-      - name: Get the Output Annotation
-        run: echo "The Annotation i got is ${{ steps.pr-warn-and-scan.outputs.annotations }}"
