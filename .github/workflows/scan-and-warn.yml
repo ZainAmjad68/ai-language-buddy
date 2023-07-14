@@ -12,7 +12,7 @@ jobs:
         with:
           fetch-depth: 0 # needed to checkout all branches for this Action to work
 
-      - name: Run PR Scan and Warn Action
+      - name: Run PR Scan and Warn Actionn
         uses: ZainAmjad68/pr-scan-and-warn@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
