@@ -32,8 +32,7 @@ jobs:
         id: pr-warn-and-scan
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          diff: ${{ steps.json-diff.outputs.diff-contents }}
-          words-to-scan-for: 'destroy()'
+          words-to-scan-for: 'destroy(), dropTable'
       # Use the output from the `hello` step
       - name: Get the Output Annotation
         run: echo "The Annotation i got is ${{ steps.pr-warn-and-scan.outputs.annotations }}"
