@@ -18,7 +18,9 @@ jobs:
       - name: CheckOut the Repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # needed to checkout all branches for this Action to work
+            ref: refs/pull/$PR_NUMBER/merge'
+        env:
+            PR_NUMBER: ${{ github.event.inputs.pr_number }}
       - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@main
         with:
