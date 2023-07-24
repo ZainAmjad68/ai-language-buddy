@@ -1,4 +1,4 @@
-name: "Scan and Warn Workflow"
+name: "Scan and Warn Workflow - Manual"
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ permissions: write-all
 jobs:
   scan-and-warn-job:
     runs-on: ubuntu-latest
-    name: A job to check for Dangerous Actions in PR
+    name: A job that runs manually to check for Dangerous Actions in PR
     steps:
       # Checkout the repo
       - name: CheckOut the Repo
