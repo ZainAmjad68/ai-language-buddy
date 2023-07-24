@@ -18,7 +18,7 @@ jobs:
       - name: CheckOut the Repo
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.ref }}
+          ref: 'pr-scan-and-warn'
       - name: Run PR Scan and Warn Action
         uses: ZainAmjad68/pr-scan-and-warn@main
         with:
