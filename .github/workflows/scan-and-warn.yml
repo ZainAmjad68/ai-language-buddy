@@ -19,3 +19,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           words-to-scan-for: 'destroy(), dropTable'
+          action-type: 'workflow_dispatch'
