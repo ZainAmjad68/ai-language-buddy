@@ -1,10 +1,13 @@
-name: "Scan and Warn Workflow - Manual"
+name: "Test Coverage Annotation - Manual"
 
 on:
   workflow_dispatch:
     inputs:
       pr_number:
         description: 'Pull Request Number'
+        required: true
+      s3FilePath:
+        description: 'Path in S3 where lcov.info file is located'
         required: true
 
 permissions: write-all
@@ -21,8 +24,8 @@ jobs:
           fetch-depth: 0
           ref: 'refs/pull/${{ github.event.inputs.pr_number }}/merge'
       - name: Run PR Scan and Warn Action
-        uses: ZainAmjad68/pr-scan-and-warn@main
+        uses: ZainAmjad68/test-coverage-annotate@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          words-to-scan-for: 'destroy(), dropTable'
           action-type: ${{ github.event_name }}
+          coverage-info-path: ${{ github.event.inputs.s3FilePath }}
