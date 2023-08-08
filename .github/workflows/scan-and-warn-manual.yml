@@ -29,3 +29,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           action-type: ${{ github.event_name }}
           coverage-info-path: ${{ github.event.inputs.s3FilePath }}
+          total-coverage-files: 10
