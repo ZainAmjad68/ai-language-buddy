@@ -9,6 +9,16 @@ import './styles/index.css';
 
 const queryClient = new QueryClient({defaultOptions: {queries: {staleTime: Infinity}}});
 
+console.log('this works 1');
+console.log('this works 2');
+console.log('this works 3');
+console.log('this works 4');
+console.log('this works 5');
+
+console.log('this works 6');
+console.log('this works 7');
+
+
 ReactDOM
   .createRoot(document.getElementById('root') as HTMLElement)
   .render(

@@ -1,0 +1,32 @@
+name: "Test Coverage Annotation - Manual"
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request Number'
+        required: true
+      s3FilePath:
+        description: 'Path in S3 where lcov.info file is located'
+        required: true
+
+permissions: write-all
+
+jobs:
+  scan-and-warn-job:
+    runs-on: ubuntu-latest
+    name: A job that runs manually to check for Dangerous Actions in PR
+    steps:
+      # Checkout the repo
+      - name: CheckOut the Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: 'refs/pull/${{ github.event.inputs.pr_number }}/merge'
+      - name: Run PR Scan and Warn Action
+        uses: ZainAmjad68/test-coverage-annotate@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          action-type: ${{ github.event_name }}
+          coverage-info-path: ${{ github.event.inputs.s3FilePath }}
+          total-coverage-files: 10
