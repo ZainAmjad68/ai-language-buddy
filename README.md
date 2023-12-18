@@ -1,5 +1,7 @@
 # ai-language-buddy
 
+A chat bot that uses AI to help you learn new languages at your own pace and in your own style. Offers versatile Conversation Modes and Real-Time Translation. Still a Work in Progress.
+
 Coming Soon Features Hopefully:
 
 - Choose between a One-Way (it or you ask questions) OR Two-Way Conversation
